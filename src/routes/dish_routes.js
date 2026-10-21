@@ -39,4 +39,24 @@ dishRouter.get("/:id", (req, res) => {
   );
 });
 
+dishRouter.get("/category/:category", (req, res) => {
+  const nameCategorie = req.params.category;
+
+  pool.query(
+    "SELECT * FROM menu.dish WHERE categorie_id IN (SELECT id FROM menu.categories WHERE LOWER(TRIM(nom)) = LOWER(TRIM($1)))",
+    [nameCategorie],
+    (error, result) => {
+      if (error) {
+        return res.json({ error: error.message });
+      }
+
+      if (result.rows.length === 0) {
+        return res.status(404).send("404 - NOT FOUND");
+      }
+
+      res.json(result.rows);
+    },
+  );
+});
+
 export { dishRouter };
