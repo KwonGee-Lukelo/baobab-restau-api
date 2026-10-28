@@ -24,20 +24,26 @@ dishRouter.get("/", (req, res) => {
 dishRouter.get("/:id", (req, res) => {
   const idParams = parseInt(req.params.id);
 
+  if (isNaN(idParams) || idParams <= 0) {
+    return res.status(400).json({
+      message: "Identifiant invalide",
+    });
+  }
+
   pool.query(
     /*$1 veut dire on crée un trou, la valeur qui sera stocké dans 
     notre variable [idParams] sera mis dans le trou crée qui est $1*/
-    "SELECT * FROM menu.dish WHERE id_dish = $1",
+    "SELECT d.id_dish, d.nom, d.description, d.prix, d.disponibilite, c.nom AS categorie FROM menu.dish d LEFT JOIN menu.categories c ON d.categorie_id = c.id WHERE d.id_dish = $1",
     [idParams],
     (error, result) => {
       if (error) {
-        return res.json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
 
       if (result.rows.length === 0) {
-        return res.status(404).send("404 - NOT FOUND");
+        return res.status(404).send("PLAT NON TROUVE");
       }
-      res.json(result.rows);
+      res.status(200).json(result.rows);
     },
   );
 });
