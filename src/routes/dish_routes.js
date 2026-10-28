@@ -1,21 +1,24 @@
 import { Router } from "express";
 import pool from "../config/database.js";
 
-const dishRouter = Router(); //On cree une route dishRouter qui ne va traiter que le route qui a pour path '/api/dish'
+const dishRouter = Router(); //On cree une route dishRouter qui ne va traiter que le route qui a pour path '/api/dishes'
 
 dishRouter.get("/", (req, res) => {
-  pool.query("SELECT * FROM menu.dish", (error, result) => {
-    if (error) {
-      return res.json({
-        error: error.message,
-      });
-    }
+  pool.query(
+    "SELECT d.id_dish, d.nom, d.description, d.prix, d.disponibilite, c.nom AS categorie FROM menu.dish d LEFT JOIN menu.categories c ON d.categorie_id = c.id ORDER BY id_dish",
+    (error, result) => {
+      if (error) {
+        return res.json({
+          error: error.message,
+        });
+      }
 
-    res.json({
-      status: "Votre requette marche",
-      responseRequette: result.rows,
-    });
-  });
+      res.json({
+        success: true,
+        data: result.rows,
+      });
+    },
+  );
 });
 
 dishRouter.get("/:id", (req, res) => {
