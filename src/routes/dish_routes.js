@@ -48,4 +48,33 @@ dishRouter.get("/:id", (req, res) => {
   );
 });
 
+dishRouter.get("/category/:category", (req, res) => {
+  const categoryParams = req.params.category;
+
+  if (categoryParams > 0 || categoryParams <= 0) {
+    return res.status(400).json({
+      message: "Categorie invalide",
+    });
+  }
+
+  pool.query(
+    "SELECT d.id_dish, d.nom, d.description, d.prix, d.disponibilite, c.nom AS categorie  FROM menu.dish d JOIN menu.categories c ON d.categorie_id = c.id WHERE c.nom ILIKE $1 ORDER BY d.nom ASC",
+    [categoryParams],
+    (error, result) => {
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+      if (result.rows.length === 0) {
+        return res.json({
+          message:
+            "ATTENTION!!! Cette categorie n'existe pas ou ne possède aucun plat",
+        });
+      }
+
+      return res.status(200).json(result.rows);
+    },
+  );
+});
+
 export { dishRouter };
