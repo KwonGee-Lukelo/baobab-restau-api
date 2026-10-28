@@ -1,7 +1,7 @@
-# CongoTaste API : construire le backend d’un menu de restaurant
-
+# Baobab-restau API : construire le backend d’un menu de restaurant
 
 ## 1. CONTEXTE MÉTIER
+
 ```
 Le restaurant Le Baobab Gourmand, spécialisé dans la cuisine congolaise, souhaite moderniser la gestion de son menu en ligne.
 
@@ -15,10 +15,11 @@ Tu es chargé de développer la première version de ce backend.
 ## 2. OBJECTIF GÉNÉRAL
 
 ```
-Concevoir une API REST avec Node.js, Express et PostgreSQL, capable de se connecter à la base de données et de fournir des informations sur les plats du restaurant à travers différentes routes HTTP. 
+Concevoir une API REST avec Node.js, Express et PostgreSQL, capable de se connecter à la base de données et de fournir des informations sur les plats du restaurant à travers différentes routes HTTP.
 ```
 
 ## 3. OBJECTIFS PÉDAGOGIQUES
+
 ```
 À la fin du projet, tu devras être capable de :
 - Configurer une connexion entre une application Node.js et PostgreSQL.
@@ -34,6 +35,7 @@ Nous allons prioritairement travailler la connexion à PostgreSQL et le routage 
 ```
 
 ## 4. FONCTIONNALITÉS ATTENDUES
+
 ```
 F1 — Vérifier l’état de l’API
 Route : GET /api/health
@@ -41,7 +43,7 @@ Route : GET /api/health
 Réponse attendue :
 {
   "status": "ok",
-  "message": "CongoTaste API is running"
+  "message": "Baobab-restau API is running"
 }
 
 F2 — Vérifier la connexion à PostgreSQL
@@ -106,6 +108,7 @@ Plusieurs plats peuvent appartenir à une même catégorie. Par exemple, « Plat
 ```
 
 ## 6. ORGANISATION TECHNIQUE PROPOSÉE
+
 ```
 congotaste-api/
 ├── src/
@@ -132,6 +135,7 @@ Rôle des fichiers :
 ```
 
 ## 7. CRITÈRES D’ACCEPTATION
+
 ```
 CA-01 — Le serveur Express démarre sans erreur.
 CA-02 — La route /api/health retourne un JSON valide.
@@ -146,6 +150,7 @@ CA-10 — Le README explique comment installer, configurer et démarrer le proje
 ```
 
 ## 8. PLAN DE RÉALISATION
+
 ```
 Étape 1 — Préparer PostgreSQL
 - Créer la base de données.
@@ -171,6 +176,7 @@ CA-10 — Le README explique comment installer, configurer et démarrer le proje
 ```
 
 ## 9. LIVRABLES ATTENDUS
+
 ```
 1. Une base PostgreSQL fonctionnelle.
 2. Une application Node.js connectée à cette base.
@@ -179,5 +185,3 @@ CA-10 — Le README explique comment installer, configurer et démarrer le proje
 5. Un dépôt GitHub propre.
 6. Un README permettant à un autre développeur de lancer le projet.
 ```
-
-

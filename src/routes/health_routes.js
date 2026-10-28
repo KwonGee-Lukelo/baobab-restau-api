@@ -3,30 +3,25 @@ import pool from "../config/database.js";
 
 const healthRouter = Router(); //On cree une route healthRouter qui ne va traiter que le route qui a pour path '/api/heath'
 
-const etat = {
-  statut: "ok",
-  message: "baobab-api est entrain de tourner",
-};
-
 healthRouter.get("/", (req, res) => {
-  res.send(etat);
+  res.status(200).json({
+    statut: "ok",
+    message: "baobab-restau API is running",
+  });
 });
 
 healthRouter.get("/db", (req, res) => {
-  const message =
-    "Votre backend s'est bien connecté à votre base des données PostgreSQL";
-
   pool.query("SELECT 1", (error, result) => {
     if (error) {
-      return res.json({
+      return res.status(500).json({
         error: error.message,
         status: "Down",
       });
     }
 
-    res.json({
+    res.status(200).json({
       db_response: result.rows,
-      status: message,
+      status: "Your backend is connected",
     });
   });
 });
