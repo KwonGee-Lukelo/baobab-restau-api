@@ -1,4 +1,5 @@
-/.vscode
 node_modules/
 .env
-doc
+.env.*
+!.env.example
+.vscode/

@@ -2,10 +2,11 @@
   "name": "routing-et-connection-bdd",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,8 @@
     "dotenv": "^18.0.8",
     "express": "^5.3.0",
     "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
